@@ -28,18 +28,30 @@ itemD
 
 the level files, which define the levels (duh) consists of 5 parts.
 
-part0 x			//x is where the part begins
+part0 x			      //x is where the part begins
+
 collidable x,y		//collidable is an object the player can interact with
+
 collidable x,y
+
 collidable x,y
+
 part1 x
+
 collidable x,y
+
 collidable x,y 
+
 collidable x,y
+
 collidable x,y
+
 part2 x
+
 etc
+
 etc
+
 
 
 the reason we devide the levels into differents parts, its because we can optimize the collision in a much smoother way. 
