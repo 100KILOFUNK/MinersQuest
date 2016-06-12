@@ -10,46 +10,35 @@ use the compile.sh to compile the program. it takes one argument and that is the
 # Principles on saving
 
 The game class should handle saving and loading.
-the save file should look something like this;
+the save file should look something like this;  
 
-Player			//keyword when loading
-3			//nr of lives
-2			//how many levels done
-sword			//equipped weapon when saved.
-Inventory		//keyword when loading
-itemA			//which items the player has
-itemB			//maximum amount is 16
-itemC
+Player			//keyword when loading  
+3			      //nr of lives  
+2			      //how many levels done  
+sword			  //equipped weapon when saved.  
+Inventory		//keyword when loading  
+itemA		  	//which items the player has  
+itemB		  	//maximum amount is 16  
+itemC  
 itemD
 
 
 
 #Level loading
 
-the level files, which define the levels (duh) consists of 5 parts.
+the level files, which define the levels (duh) consists of 5 parts.  
 
-part0 x			      //x is where the part begins
-
-collidable x,y		//collidable is an object the player can interact with
-
-collidable x,y
-
-collidable x,y
-
-part1 x
-
-collidable x,y
-
-collidable x,y 
-
-collidable x,y
-
-collidable x,y
-
-part2 x
-
-etc
-
+part0 x			      //x is where the part begins  
+collidable x,y		//collidable is an object the player can interact with  
+collidable x,y  
+collidable x,y  
+part1 x  
+collidable x,y  
+collidable x,y  
+collidable x,y  
+collidable x,y  
+part2 x  
+etc  
 etc
 
 
