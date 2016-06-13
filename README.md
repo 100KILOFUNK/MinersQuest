@@ -39,8 +39,8 @@ collidable x,y
 collidable x,y  
 part2 x  
 etc  
-etc
-Path/to/level/Specific/song.fileformat
+etc  
+Path/to/level/Specific/song.fileformat  
 
 
 
