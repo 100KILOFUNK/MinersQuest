@@ -46,3 +46,7 @@ etc
 the reason we devide the levels into differents parts, its because we can optimize the collision in a much smoother way. 
 By just checking the collidables of each part we dont have to check all the objects like we do today (2016/06/12)
 after the player has chosen the level, the game class will be responsible of loading the level. 
+
+#OST
+
+https://open.spotify.com/user/summerborn/playlist/6c1ceZeThxmgTeoQZuqfX5
