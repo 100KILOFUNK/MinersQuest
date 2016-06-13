@@ -21,12 +21,12 @@ int main()
 
 			if(event.type == sf::Event::KeyPressed){
                 if(event.key.code == sf::Keyboard::P) {
-
-                    if(game.getPause()){
+										game.test();
+                    /*if(game.getPause()){
 												game.setPause(false);
 										}else{
 												game.setPause(true);
-										}
+										}*/
                 }
 								else if(event.key.code == sf::Keyboard::Return)
 										game.setStart(true);

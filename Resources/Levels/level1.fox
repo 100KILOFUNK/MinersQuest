@@ -1,0 +1,16 @@
+part0 0
+ground x,y
+box x,y
+box x,y
+box x,y
+box x,y
+part1 1
+box x,y
+box x,y
+box x,y
+box x,y
+part2 2
+box x,y
+box x,y
+box x,y
+music.mp3

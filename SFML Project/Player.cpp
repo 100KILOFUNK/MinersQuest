@@ -40,6 +40,7 @@ void Player::Update(float dt)
 	// Update jump
 	if (mIsJumping)
 	{
+
 		direction.y = mJumpSpeed;
 		mJumpSpeed += mGravity * dt;
 		mGravity += 5.f * fallSpeed * dt;
@@ -49,12 +50,20 @@ void Player::Update(float dt)
 			mGravity = 9.82f;
 			mIsJumping = false;
 			mJumpSpeed = 0.0f;
+
 		}else
 			mIsJumping = true;
 	}
 
-	mSpriteSheet.move(direction * mSpeed * dt);
 
+	mSpriteSheet.move(direction * mSpeed * dt);
+	bbox.move(direction * mSpeed * dt);
+	bboxLeft.move(direction * mSpeed * dt);
+	bboxRight.move(direction * mSpeed * dt);
+	weaponBox.move(direction * mSpeed * dt);
+
+
+	//moveAll(position);
 	// Update animation
 	if (mKeyFrameDuration >= mAnimationSpeed)
 	{
@@ -76,6 +85,9 @@ void Player::Update(float dt)
 
 				setCollisionDeath(false);
 	}
+
+
+
 }
 
 void Player::setfallSpeed(const float fallSpeed) {
@@ -120,12 +132,12 @@ void Player::attackAnimation(float dt) {
 			if (mCurrentKeyFrame.y == 0)
 			{
 				weaponBox.move(-weaponBox.getSize().x, 0);
-				direction.x = -5.f;
+				//direction.x = -1.f;
 			}
 			if (mCurrentKeyFrame.y == 1)
 			{
 				weaponBox.move(weaponBox.getSize().x, 0);
-				direction.x = 5.f;
+				//direction.x = 1.f;
 			}
 		}
 		mKeyFrameDuration += dt;
@@ -198,9 +210,9 @@ int Player::getLife() const {
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(mSpriteSheet, states);
-	//target.draw(bbox, states);
-	//target.draw(bboxLeft, states);
-	//target.draw(bboxRight, states);
-	//target.draw(weaponBox, states);
+	target.draw(bbox, states);
+	target.draw(bboxLeft, states);
+	target.draw(bboxRight, states);
+	target.draw(weaponBox, states);
 
 }

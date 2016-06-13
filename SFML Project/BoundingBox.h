@@ -16,12 +16,13 @@ protected:
 
 public:
 	BoundingBox();
-	
+
 	void boundingBox(sf::Vector2f position, sf::Vector2f size, float posDiffrenceY, float posDiffrenceX);
 
 	sf::RectangleShape getBoundingBox() const;
 	sf::RectangleShape getBboxLeft() const;
 	sf::RectangleShape getBboxRight() const;
 	sf::RectangleShape getWeaponBox() const;
-};
 
+	
+};

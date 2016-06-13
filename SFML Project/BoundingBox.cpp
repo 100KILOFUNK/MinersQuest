@@ -41,7 +41,7 @@ void BoundingBox::boundingBox(sf::Vector2f position, sf::Vector2f size, float po
 	//boudingbox values
 	this->posDiffrenceY = posDiffrenceY;
 	this->posDiffrenceX = posDiffrenceX;
-	bboxposition = { position.x + posDiffrenceX, position.y + posDiffrenceY };
+	bboxposition = { position.x + posDiffrenceX , position.y + posDiffrenceY };
 	bboxsize = { size.x - (posDiffrenceX * 2), size.y - posDiffrenceY };
 
 	//sidebox

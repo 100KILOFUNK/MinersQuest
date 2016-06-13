@@ -1,6 +1,6 @@
 #pragma once
-
-class Inventory(){
+#include "LinkedList.h"
+class Inventory{
 
 private:
   LinkedList inventory;
@@ -12,4 +12,4 @@ public:
   //modifiers and accessors.
 
 
-}
+};

@@ -1,4 +1,5 @@
 #pragma once
+#include "Menu.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -13,6 +14,8 @@ class UI: public sf::Drawable {
     sf::Texture heart;
     sf::Sprite *heartSprites[3];
     int nrOfSprites = 3;
+
+    Menu menu;
 
 
     sf::Font font;

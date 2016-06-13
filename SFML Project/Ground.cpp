@@ -16,5 +16,5 @@ Ground::Ground(sf::Vector2f position) : BoundingBox()
 
 void Ground::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	target.draw(groundSprite, states);
-	//target.draw(bbox, states);
+	target.draw(bbox, states);
 }

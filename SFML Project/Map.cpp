@@ -1,6 +1,6 @@
 #include "Map.h"
-
-
+#include <iostream>
+using namespace std;
 
 Map::Map() : mGround(sf::Vector2f(-500, 500))
 {
@@ -10,6 +10,19 @@ Map::Map() : mGround(sf::Vector2f(-500, 500))
 	mBox[2] = new Box(sf::Vector2f(500, 450));
 	mBox[3] = new Box(sf::Vector2f(800, 450));
 	mBox[4] = new Box(sf::Vector2f(1100, 450));
+}
+
+void Map::test(){
+	std::ifstream lvl("../Resources/Levels/level1.fox");
+	std::string line;
+	if (lvl.is_open()){
+	    while ( getline (lvl,line) )
+	    {
+	      cout << line << '\n';
+	    }
+	    lvl.close();
+	}else cout << "unable to open";
+
 }
 
 Map::~Map(){

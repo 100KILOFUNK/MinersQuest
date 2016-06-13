@@ -72,19 +72,22 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	// Make sure everything in the game is drawn.
 	target.draw(backgroundSprite, states);
 
-	target.draw(mPlayer, states);
+
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
 		//if (mEnemies[i] != nullptr)
 			target.draw(*mEnemies[i], states);
 	}
 	target.draw(mMap, states);
-
+	target.draw(mPlayer, states);
 	//UI
 	//target.draw(*ui, states);
 
 }
 
+void Game::test(){
+	mMap.test();
+}
 
 void Game::CollisionCheck(Character *obj) {
 

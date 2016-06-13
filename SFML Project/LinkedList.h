@@ -1,16 +1,17 @@
 #pragma once
-
+#include "Item.h"
 class LinkedList {
 
 private:
-  template <class T>
+
   class Node{
-    T elem;
+    Item* elem; //replace int with item
     Node* next;
 
     Node(){ next = nullptr; }
-    Node(T elem) {  this.elem = elem; this.next = nullptr};
-  }
+    Node(Item* elem){ this->elem = elem; next = nullptr;  };
+
+  };
 
   Node* first;
   Node* last;
@@ -20,4 +21,4 @@ public:
   //getters and setters
 
 
-}
+};

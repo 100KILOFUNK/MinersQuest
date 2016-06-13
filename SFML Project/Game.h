@@ -5,7 +5,7 @@
 #include "Map.h"
 #include "UI.h"
 #include <iostream>
-
+#include <fstream>
 class Game :
 	public sf::Drawable
 {
@@ -65,11 +65,12 @@ public:
 	bool getStart() const;
 
 
+	void test();
 	//memorymanagement
 	void removeEnemy(int index);
 
 	//saving
-	
+
 
 
 };

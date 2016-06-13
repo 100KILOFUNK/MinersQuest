@@ -139,16 +139,16 @@ void UI::moveUI(sf::Vector2f camera){
 void UI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	// Make sure everything in the game is drawn.
-  if(start){
+  if(start && !pause){
       for(int i = 0; i < nrOfSprites; i++)
         target.draw(*heartSprites[i]);
-        
+
       target.draw(staticPts);
       target.draw(pts);
   }
 	//states
-	if(!start) target.draw(startScreenS);
-	if(pause)	 target.draw(pauseScreenS);
+	if(!start || pause) target.draw(menu);
+
   //if(end)     draw the deadthscreen
 }
 

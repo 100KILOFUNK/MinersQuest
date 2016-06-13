@@ -3,7 +3,7 @@
 
 Character::Character() : BoundingBox()
 {
-	
+
 
 	mTexture.loadFromFile("../Resources/Dwarf.png");
 	mTexture.setRepeated(false);
@@ -50,13 +50,13 @@ bool Character::getCollisionDown() const {
 void Character::collisionLogic() {
 	if (!collisionDown && fallSpeed == 0.0f)
 	{
-		fallSpeed = 0.0f;
+		fallSpeed = 0.0f; //whats the point of this if statement?
 	}
 	if (!collisionDown)
 	{
 		if (fallSpeed < mGravity)
 		{
-			fallSpeed = fallSpeed + 0.005f;
+			fallSpeed = fallSpeed + 0.05f;
 		}
 	}
 	if (collisionDown)
