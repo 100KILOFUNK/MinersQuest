@@ -11,4 +11,6 @@ if [ "$1" != "" ]; then
     echo "starting"
     ./"$1"
   fi
+else
+  echo "no filename given, please try again"
 fi
