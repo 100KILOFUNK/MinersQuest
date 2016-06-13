@@ -33,20 +33,23 @@ Game::~Game() {
 
 }
 
-void Game::Update(float dt)
+void Game::Update(float dt, sf::RenderWindow &app)
 {
 
+		ui->update(dt, app);
+
+		float time = gameTime.getElapsedTime().asSeconds();
 
 
-		if(!ui->getPause() && ui->getStart())
-			mPlayer.Update(dt);
-
-
+		if(!ui->getPause() || ui->getStart() || mPlayer.getIsDead()){
 			CollisionCheck(&mPlayer);
+			mPlayer.Update(dt, time);
+		}
+
 
 			for (int i = 0; i < nrOfEnemies; i++) {
 					CollisionCheck(mEnemies[i]);
-					mEnemies[i]->Update(dt, i);
+					mEnemies[i]->Update(dt, time, i);
 			}
 			// Make sure everything in the game is updated (if needed).
 
@@ -60,18 +63,13 @@ void Game::Update(float dt)
 
 			ui->setPts(mPlayer.getPts());
 			backgroundSprite.setPosition(mPlayer.getBoundingBox().getPosition().x - 550, mPlayer.getBoundingBox().getPosition().y - 475);
-
-			//for (i; i < nrofgrdobjects; i++)
-			//mPlayer.getSprite.getGlobalBounds().intersects(mMap.groundObj->getgroundSprite());
-
-
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	// Make sure everything in the game is drawn.
 	target.draw(backgroundSprite, states);
-
+	target.draw(mPlayer, states);
 
 	for (int i = 0; i < nrOfEnemies; i++)
 	{
@@ -79,7 +77,7 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 			target.draw(*mEnemies[i], states);
 	}
 	target.draw(mMap, states);
-	target.draw(mPlayer, states);
+
 	//UI
 	//target.draw(*ui, states);
 
@@ -94,16 +92,17 @@ void Game::CollisionCheck(Character *obj) {
 	//Check collision to ground
 	int index = -1;
 
+	if (collidesWithGround(obj)){ //kolla om den collidar med marken
+		obj->setCollisionDown(true);
+	}else{
+		obj->setCollisionDown(false);
+	}
+
 	for (int i = 0; i < 5; i++)
 	{
 		if (collideLeft(obj, i) || collideRight(obj, i) || collideBottom(obj, i)) //hitta platformen som den collidar med, -1 om ingen
 			index = i;
 	}
-
-	if (collidesWithGround(obj)) //kolla om den collidar med marken
-		obj->setCollisionDown(true);
-	else
-		obj->setCollisionDown(false);
 
 
 
@@ -112,16 +111,11 @@ void Game::CollisionCheck(Character *obj) {
 		if (collideBottom(obj, index)) //kolla s� den inte collidar ner
 			obj->setCollisionDown(true);
 
-
-
 		if (collideLeft(obj, index))    //kolla s� inte v�nster BB collidar
 			obj->setCollisionLeft(true);
 
-
-
 		if (collideRight(obj, index))   //kolla s� inte BB right collidar
 			obj->setCollisionRight(true);
-
 
 	}
 	else {
@@ -149,15 +143,25 @@ void Game::enemyCollision() {
 		if (mPlayer.getBoundingBox().getGlobalBounds().intersects(mEnemies[index]->getBoundingBox().getGlobalBounds()))
 		{
 
-			mPlayer.setLife(mPlayer.getLife() - 1);
-			ui->setLife(mPlayer.getLife());
+			if (!mEnemies[index]->getAboutToDie())
+			{
+				mPlayer.setLife(mPlayer.getLife() - 1);
+				ui->setLife(mPlayer.getLife());
+				if(mPlayer.getLife() == 0) mPlayer.setAboutToDie(true);
+			}
 		}
 
 		if (mPlayer.getWeaponBox().getGlobalBounds().intersects(mEnemies[index]->getBoundingBox().getGlobalBounds()))
 		{
 			//play the death animation for enemies
-			mPlayer.setPts(mPlayer.getPts() + 50);
-			removeEnemy(index);
+			if (!mPlayer.getAboutToDie())
+			{
+				//mEnemies[index]->setAboutToDie(true);
+				mPlayer.setPts(mPlayer.getPts() + 50);
+				removeEnemy(index);
+			}
+
+
 		}
 	}
 

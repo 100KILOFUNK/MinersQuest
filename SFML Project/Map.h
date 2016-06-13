@@ -14,10 +14,12 @@ private:
 	Ground mGround;
 	Box *mBox[5];
 
+
+	int parts[5];
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 public:
 	Map();
-	//Map(std::ifstream levelFile);
+	//Map(string level);
 	~Map();
 
 	void test();

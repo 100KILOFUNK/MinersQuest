@@ -27,7 +27,9 @@ protected:
 	bool collisionLeft, collisionRight, collisionUp, collisionDown;
 
 	//Death
-	bool death = false;
+	bool aboutToDie = false;
+	bool isDead = false;
+	float deathTimer = 0;
 
 public:
 	Character();
@@ -54,4 +56,11 @@ public:
 	void directionAnimation();
 
 	void setCollisionDeath(const bool dead);
+
+	bool getAboutToDie() const;
+	void setAboutToDie(const bool aboutToDie);
+
+	bool getIsDead() const;
+	void setIsDead(const bool dead);
+
 };

@@ -44,7 +44,7 @@ class UI: public sf::Drawable {
 
     sf::View getHUDView();
     void moveUI(sf::Vector2f camera);
-    void update(float dt);
+    void update(float dt, sf::RenderWindow& app);
     sf::Sprite getPauseScreen();
 
     void setPauseScreenPos(float x, float y);

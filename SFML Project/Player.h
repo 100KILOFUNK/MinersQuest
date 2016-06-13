@@ -28,7 +28,7 @@ private:
 
 public:
 	Player(sf::Vector2f position);
-	void Update(float dt);
+	void Update(float dt, float gameTime);
 
 	void setLife(int i);
 	int getLife() const;
@@ -40,7 +40,7 @@ public:
 	void setfallSpeed(const float fallSpeed);
 	float getfallSpeed() const;
 
-	void control(float dt);
+	void control(float dt, float gameTime);
 
 
 };

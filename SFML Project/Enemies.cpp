@@ -21,12 +21,12 @@ Enemies::Enemies(sf::Vector2f position) : Character()
 	direction.x = 0;
 }
 
-void Enemies::Update(float dt, int offset) {
+void Enemies::Update(float dt, float gameTime, int offset) {
 
 	position = mSpriteSheet.getPosition();
 	boundingBox(position, spriteSize, 28, 28);
 	collisionLogic();
-	behaviour(dt, offset);
+	behaviour(dt, gameTime, offset);
 
 	mSpriteSheet.move(direction * mSpeed * dt);
 
@@ -46,7 +46,7 @@ void Enemies::Update(float dt, int offset) {
 	}
 }
 
-void Enemies::behaviour(float dt, int offset) {
+void Enemies::behaviour(float dt, float gameTime, int offset) {
 	//direction.x = 0.0f;
 	direction.y = fallSpeed;
 
@@ -80,7 +80,28 @@ void Enemies::behaviour(float dt, int offset) {
 		mCurrentKeyFrame.y = 0;
 	}
 
-	directionAnimation();
+	if (!aboutToDie) {
+		directionAnimation();
+		deathTimer = gameTime + 3;
+	}
+	else if (aboutToDie)
+	{
+		direction.x = 0.0f;
+		if (deathTimer > gameTime + 2.7)
+		{
+			mCurrentKeyFrame.x = 13;
+		}
+		else if (deathTimer > gameTime)
+		{
+			mCurrentKeyFrame.x = 14;
+		}
+		if (deathTimer <= gameTime)
+		{
+			setIsDead(true);
+		}
+	}
+
+
 
 }
 

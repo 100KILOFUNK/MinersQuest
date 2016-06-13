@@ -1,5 +1,7 @@
 #include "Player.h"
 #include <iostream>
+#include <cstdio>
+#include <ctime>
 
 Player::Player(sf::Vector2f position) : Character()
 {
@@ -19,40 +21,53 @@ Player::Player(sf::Vector2f position) : Character()
 	mSpriteSheet.setPosition(position);
 }
 
-void Player::Update(float dt)
+void Player::Update(float dt, float gameTime)
 {
 	//std::cout << this->bboxposition.x << " " << this->bboxposition.y << std::endl;
 	position = mSpriteSheet.getPosition();
 	boundingBox(position, spriteSize, 28, 28);
 	collisionLogic();
-	control(dt);
+	control(dt, gameTime);
 
 
 	// Check to start jumping
 	bool isSpacePressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
-	if (isSpacePressed && !mIsJumping)
-	{
-		mIsJumping = true;
-		collisionDown = false;
-		mJumpSpeed = -3.0f;
+	if (isSpacePressed && !mIsJumping && !aboutToDie){
+			mIsJumping = true;
+			collisionDown = false;
+			mJumpSpeed = -3.0f;
 	}
 
 	// Update jump
-	if (mIsJumping)
-	{
-
+	if (mIsJumping){
 		direction.y = mJumpSpeed;
 		mJumpSpeed += mGravity * dt;
-		mGravity += 5.f * fallSpeed * dt;
+
 		// Check to see if jump is finished and if so, clean up.
-		if (collisionDown)
-		{
-			mGravity = 9.82f;
+		if (collisionDown){
 			mIsJumping = false;
 			mJumpSpeed = 0.0f;
+		}
+	}
 
-		}else
-			mIsJumping = true;
+
+	//this shoud go ina function
+	if (!aboutToDie) {
+		deathTimer = gameTime + 3;
+	}
+	else if (aboutToDie)
+	{
+		mKeyFrameDuration += dt;
+		if (deathTimer > gameTime + 2.7){
+			mCurrentKeyFrame.x = 13;
+		}
+		else if (deathTimer > gameTime){
+			mCurrentKeyFrame.x = 14;
+		}
+		if (deathTimer <= gameTime){
+			mCurrentKeyFrame.x = 14;
+			setIsDead(true);
+		}
 	}
 
 
@@ -76,17 +91,6 @@ void Player::Update(float dt)
 			mCurrentKeyFrame.y * mKeyFrameSize.y, mKeyFrameSize.x, mKeyFrameSize.y));
 		mKeyFrameDuration = 0.0f;
 	}
-
-	if (death) {
-
-
-				direction.x -= 5;
-			 	mSpriteSheet.move(direction * mSpeed * dt);
-
-				setCollisionDeath(false);
-	}
-
-
 
 }
 
@@ -132,7 +136,7 @@ void Player::attackAnimation(float dt) {
 			if (mCurrentKeyFrame.y == 0)
 			{
 				weaponBox.move(-weaponBox.getSize().x, 0);
-				//direction.x = -1.f;
+				//direction.x = -1.f; //dash functionality (OPTIONAL);
 			}
 			if (mCurrentKeyFrame.y == 1)
 			{
@@ -182,13 +186,17 @@ void Player::directionHandler(float dt) {
 	}
 }
 
-void Player::control(float dt) {
+void Player::control(float dt, float gameTime) {
 	direction.x = 0.0f;
 	direction.y = fallSpeed;
 
-	idleAnimation(dt);
-	attackAnimation(dt);
-	directionHandler(dt);
+
+	if (!aboutToDie)
+	{
+		directionHandler(dt);
+		idleAnimation(dt);
+		attackAnimation(dt);
+	}
 }
 
 int Player::getPts() const{
@@ -210,9 +218,9 @@ int Player::getLife() const {
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(mSpriteSheet, states);
-	target.draw(bbox, states);
-	target.draw(bboxLeft, states);
-	target.draw(bboxRight, states);
-	target.draw(weaponBox, states);
+	//target.draw(bbox, states);
+	//target.draw(bboxLeft, states);
+	//target.draw(bboxRight, states);
+	//target.draw(weaponBox, states);
 
 }

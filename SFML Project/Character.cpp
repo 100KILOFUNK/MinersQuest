@@ -90,7 +90,22 @@ float Character::getfallSpeed() const {
 }
 
 void Character::setCollisionDeath(const bool dead) {
-	this->death = dead;
+	//this->death = dead;
+}
+
+bool Character::getAboutToDie() const {
+	return this->aboutToDie;
+}
+void Character::setAboutToDie(const bool aboutToDie) {
+	this->aboutToDie = aboutToDie;
+}
+
+bool Character::getIsDead() const {
+	return this->isDead;
+}
+
+void Character::setIsDead(const bool dead) {
+	this->isDead = dead;
 }
 
 void Character::directionAnimation() {

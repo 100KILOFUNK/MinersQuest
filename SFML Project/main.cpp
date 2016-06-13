@@ -12,7 +12,7 @@ int main()
 
 	while (window.isOpen())
 	{
-		sf::Event event;
+		/*sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
@@ -20,24 +20,25 @@ int main()
 			}
 
 			if(event.type == sf::Event::KeyPressed){
-                if(event.key.code == sf::Keyboard::P) {
-										game.test();
-                    /*if(game.getPause()){
+                /*if(event.key.code == sf::Keyboard::P) {
+
+                    if(game.getPause()){
 												game.setPause(false);
 										}else{
 												game.setPause(true);
-										}*/
+										}
                 }
 								else if(event.key.code == sf::Keyboard::Return)
 										game.setStart(true);
-
+								else if(event.key.code == sf::Keyboard::T)
+										game.test();
       }
-		}
+		}*/
 		//sf::View view(sf::FloatRect(game.getPlayerPosX() - 550, game.getPlayerPosY() - 400, 1200, 600));
 
 
 		window.clear();
-		game.Update(gameTime.restart().asSeconds());
+		game.Update(gameTime.restart().asSeconds(), window);
 		window.setView(game.getView());
 
 		window.draw(game);

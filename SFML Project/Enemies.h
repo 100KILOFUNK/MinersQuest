@@ -18,9 +18,8 @@ private:
 public:
 	Enemies(sf::Vector2f position);
 
-	void Update(float dt, int offset);
+	void Update(float dt, float gameTime, int offset);
 
-	void behaviour(float dt, int offset);
+	void behaviour(float dt, float gameTime, int offset);
 
 };
-

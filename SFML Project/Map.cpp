@@ -10,18 +10,41 @@ Map::Map() : mGround(sf::Vector2f(-500, 500))
 	mBox[2] = new Box(sf::Vector2f(500, 450));
 	mBox[3] = new Box(sf::Vector2f(800, 450));
 	mBox[4] = new Box(sf::Vector2f(1100, 450));
+
+	for(int i = 0; i < 5; i++)
+		parts[i] = 0;
+
 }
 
+/*Map::Map(string level){
+	std::ifstream lvl("../Resources/Levels/" + level);
+}*/
+
 void Map::test(){
-	std::ifstream lvl("../Resources/Levels/level1.fox");
+	std::ifstream lvl("../Resources/Levels/level1.mql");
 	std::string line;
+	std::string part = "part";
+	int counter = 0;
 	if (lvl.is_open()){
-	    while ( getline (lvl,line) )
+	    while ( getline (lvl,line, ' ') )
 	    {
-	      cout << line << '\n';
+				std::size_t found = line.find(part);
+  			if (found!=std::string::npos && counter < 5){
+					char tmp;
+					lvl.get(tmp);
+					parts[counter] = (int) tmp - 48;
+
+					counter++;
+				}
+
+
 	    }
 	    lvl.close();
 	}else cout << "unable to open";
+
+
+	for(int i = 0; i < 5; i++)
+		cout << "part " << i << ": " << parts[i] << endl;
 
 }
 

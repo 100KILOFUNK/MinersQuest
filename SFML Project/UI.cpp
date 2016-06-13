@@ -118,9 +118,31 @@ UI::~UI(){
 
 }
 
-void UI::update(float dt){
+void UI::update(float dt, sf::RenderWindow& app){
+
+  sf::Event event;
+  while(app.pollEvent(event)){
+
+    if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+      app.close();
+    }
+
+    if(event.type == sf::Event::KeyPressed){
+        if(event.key.code == sf::Keyboard::P)
+          if(getPause())
+            setPause(false);
+          else
+            setPause(true);
+
+    }
+
+    if(event.key.code == sf::Keyboard::Return)
+      setStart(true);
+
+  }
 
 }
+
 
 void UI::setLife(int life){
   this->nrOfSprites = life;

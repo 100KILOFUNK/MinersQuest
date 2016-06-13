@@ -31,6 +31,7 @@ private:
 	sf::View view;
 	float playerPosViewX;
 	float playerPosViewY;
+	sf::Clock gameTime;
 public:
 	Game();
 	~Game();
@@ -45,7 +46,7 @@ public:
 	void enemyCollision();
 
 	//update
-	void Update(float dt);
+	void Update(float dt, sf::RenderWindow& app);
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 	//player related
