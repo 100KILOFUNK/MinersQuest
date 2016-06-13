@@ -139,6 +139,13 @@ void UI::update(float dt, sf::RenderWindow& app){
     if(event.key.code == sf::Keyboard::Return)
       setStart(true);
 
+    if(event.key.code == sf::Keyboard::F){
+
+      sf::VideoMode mode(1920, 1080);
+      sf::ContextSettings test;
+      app.create(mode, "Miner's Quest", sf::Style::Fullscreen, test);
+    }
+
   }
 
 }
@@ -170,6 +177,7 @@ void UI::draw(sf::RenderTarget &target, sf::RenderStates states) const
   }
 	//states
 	if(!start || pause) target.draw(menu);
+  if(!start) target.draw(startScreenS);
 
   //if(end)     draw the deadthscreen
 }

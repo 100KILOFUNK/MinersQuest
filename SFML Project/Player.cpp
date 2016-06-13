@@ -19,6 +19,7 @@ Player::Player(sf::Vector2f position) : Character()
 	mSpriteSheet.setTexture(mTexture);
 	mSpriteSheet.setTextureRect(sf::IntRect(0, 0, 10, 10));
 	mSpriteSheet.setPosition(position);
+	
 }
 
 void Player::Update(float dt, float gameTime)

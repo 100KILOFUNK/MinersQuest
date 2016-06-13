@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-Menu::Menu(): menuP(sf::Vector2f (1, 3)){
+Menu::Menu(): menuP(sf::Vector2f (100, 400)){
   if(!Tbg.loadFromFile("../Resources/menubg.png")){
     std::cout << "Erro loading menubg.png";
   }
@@ -10,11 +10,12 @@ Menu::Menu(): menuP(sf::Vector2f (1, 3)){
   menuP.setfallSpeed(0.0);
 
 
+
 }
 
 
 void Menu::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(Sbg);
-  //target.draw(menuP);
+  //target.draw(menuP, states);
 }

@@ -36,33 +36,38 @@ Game::~Game() {
 void Game::Update(float dt, sf::RenderWindow &app)
 {
 
-		ui->update(dt, app);
-
-		float time = gameTime.getElapsedTime().asSeconds();
-
 
 		if(!ui->getPause() || ui->getStart() || mPlayer.getIsDead()){
-			CollisionCheck(&mPlayer);
-			mPlayer.Update(dt, time);
+			float time = gameTime.getElapsedTime().asSeconds();
+
+			for (int i = 0; i < nrOfEnemies; i++){
+				CollisionCheck(mEnemies[i]);
+			}
+
+			for (int i = 0; i < nrOfEnemies; i++) {
+				mEnemies[i]->Update(dt, time, i);
+			}
+
+
+				CollisionCheck(&mPlayer);
+				mPlayer.Update(dt, time);
 		}
 
 
-			for (int i = 0; i < nrOfEnemies; i++) {
-					CollisionCheck(mEnemies[i]);
-					mEnemies[i]->Update(dt, time, i);
-			}
-			// Make sure everything in the game is updated (if needed).
+		// Make sure everything in the game is updated (if needed).
 
 
 
-			playerPosViewX = mPlayer.getBoundingBox().getPosition().x;
-			playerPosViewY = mPlayer.getBoundingBox().getPosition().y;
+		playerPosViewX = mPlayer.getBoundingBox().getPosition().x;
+		playerPosViewY = mPlayer.getBoundingBox().getPosition().y;
 
 
-			moveView();
+		moveView();
 
-			ui->setPts(mPlayer.getPts());
-			backgroundSprite.setPosition(mPlayer.getBoundingBox().getPosition().x - 550, mPlayer.getBoundingBox().getPosition().y - 475);
+		ui->setPts(mPlayer.getPts());
+		backgroundSprite.setPosition(mPlayer.getBoundingBox().getPosition().x - 550, mPlayer.getBoundingBox().getPosition().y - 475);
+
+		ui->update(dt, app);
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -92,17 +97,19 @@ void Game::CollisionCheck(Character *obj) {
 	//Check collision to ground
 	int index = -1;
 
+	for (int i = 0; i < 5; i++)
+	{
+		if (collideLeft(obj, i) || collideRight(obj, i) || collideBottom(obj, i)) //hitta platformen som den collidar med, -1 om ingen
+			index = i;
+	}
+
 	if (collidesWithGround(obj)){ //kolla om den collidar med marken
 		obj->setCollisionDown(true);
 	}else{
 		obj->setCollisionDown(false);
 	}
 
-	for (int i = 0; i < 5; i++)
-	{
-		if (collideLeft(obj, i) || collideRight(obj, i) || collideBottom(obj, i)) //hitta platformen som den collidar med, -1 om ingen
-			index = i;
-	}
+
 
 
 
