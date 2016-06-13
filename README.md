@@ -51,3 +51,10 @@ after the player has chosen the level, the game class will be responsible of loa
 #OST
 
 https://open.spotify.com/user/summerborn/playlist/6c1ceZeThxmgTeoQZuqfX5
+
+
+# 13/6/2016
+
+I've moved the polling functionality from the main function to the UI class, where it fits better.  
+I've also merged Leos implementation of death animations.  
+There is a known bug, when jumpping, the character goes through the ground, depending on how high he is jumping.
